@@ -50,6 +50,15 @@
     - nagios-plugins-users
     - nagios-plugins-disk
     - libsemanage-python
+    - ndoutils
+    - check-mk-livestatus
+    - perl-DBI
+
+- name: Install MariaDB
+  yum: name={{ item }} state=present
+  with_items:
+    - mariadb-server
+  notify:  start mariadb-server
 
 - name: Check nagios Users
   stat: path=/etc/nagios/passwd
@@ -288,4 +297,3 @@
 - name: Display user password change information
   debug:
     msg="Run the following to change the nagios password --> htpasswd /etc/nagios/passwd nagiosadmin"
-

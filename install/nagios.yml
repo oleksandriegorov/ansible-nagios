@@ -8,19 +8,19 @@
 # https://github.com/ansible/ansible/issues/9260
 # we skip switches/oobservers because they normally don't
 # have python installed.
+- hosts: all
+  handlers:
+    - include: ../handlers/handlers.yml
 
 - hosts: all:!switches:!oobservers:!idrac
-  remote_user: root
   tasks: []
 
 # role for nagios clients via NRPE
 - hosts: all:!switches:!oobservers:!nagios:!idrac
-  remote_user: root
   roles:
     - { role: nagios-client }
 
 # role for nagios server
 - hosts: nagios
-  remote_user: root
   roles:
     - { role: nagios }
