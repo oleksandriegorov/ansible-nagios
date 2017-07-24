@@ -50,7 +50,6 @@
     - nagios-plugins-users
     - nagios-plugins-disk
     - libsemanage-python
-    - ndoutils
     - check-mk-livestatus
     - perl-DBI
 
@@ -59,6 +58,10 @@
   with_items:
     - mariadb-server
   notify:  start mariadb-server
+
+- name: Install NDOutils
+  yum: name=ndoutils state=present
+  notify: start ndo2db service
 
 - name: Check nagios Users
   stat: path=/etc/nagios/passwd

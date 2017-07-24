@@ -1,3 +1,6 @@
 ---
 - name: start mariadb-server
   systemd: name=mariadb.service state=started enabled=yes
+
+- name: start ndo2db service
+  systemd: name=ndo2db.service state=started enabled=yes
